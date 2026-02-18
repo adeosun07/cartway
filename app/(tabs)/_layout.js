@@ -1,41 +1,35 @@
-import {Tabs} from "expo-router";
+import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
+const tabs = [
+  { name: "index", title: "Home", icon: "home-outline" },
+  { name: "delivery", title: "Delivery", icon: "cube-outline" },
+  { name: "discovery", title: "Discovery", icon: "bag-handle-outline" },
+  { name: "services", title: "Services", icon: "grid-outline" },
+  { name: "profile", title: "Profile", icon: "person-outline" },
+];
+
 export default function Layout() {
-    return (
-        <Tabs>
-            <Tabs.Screen name="index" options={{headerShown: false,
-                title: "Home",
-                tabBarIcon: ({ color, size }) => (
-                    <Ionicons name="home-outline" size={20} color={color} />
-                ),
-                tabBarActiveTintColor: "#d40000",
-                tabBarInactiveTintColor: "#6b7280",
-            }}/>
-            <Tabs.Screen name="delivery" options={{headerShown: false,
-                title: "Delivery",
-                tabBarIcon: ({ color, size }) => (
-                    <Ionicons name="cube-outline" size={20} color={color} />
-                ),
-            }}/>
-            <Tabs.Screen name="discovery" options={{headerShown: false,
-                title: "Discovery",
-                tabBarIcon: ({ color, size }) => (
-                    <Ionicons name="bag-handle-outline" size={20} color={color} />
-                ),
-            }}/>
-            <Tabs.Screen name="services" options={{headerShown: false, 
-                title: "Services",
-                tabBarIcon: ({ color, size }) => (
-                    <Ionicons name="grid-outline" size={20} color={color} />
-                ),
-                }}/>
-            <Tabs.Screen name="profile" options={{headerShown: false,
-                title: "Profile",
-                tabBarIcon: ({ color, size }) => (
-                    <Ionicons name="person-outline" size={20} color={color} />
-                ),
-            }}/>
-        </Tabs>
-    )
+  return (
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: "#d40000",
+        tabBarInactiveTintColor: "#6b7280",
+      }}
+    >
+      {tabs.map(({ name, title, icon }) => (
+        <Tabs.Screen
+          key={name}
+          name={name}
+          options={{
+            title,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name={icon} size={size * 0.8} color={color} />
+            ),
+          }}
+        />
+      ))}
+    </Tabs>
+  );
 }
